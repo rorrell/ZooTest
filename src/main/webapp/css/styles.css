@@ -1,0 +1,40 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 10, 2016, 10:46:33 AM
+    Author     : rachel
+*/
+
+table, td, thead {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 5px 10px;
+    font-family: sans-serif;
+}
+
+thead {
+    background-color: darkseagreen;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+thead a {
+    text-decoration: none;
+}
+
+a:hover {
+    color: maroon;
+}
+
+thead a:visited {
+    color: white;
+}
+
+thead a:hover {
+    color: blueviolet;
+}

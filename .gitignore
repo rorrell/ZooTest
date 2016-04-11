@@ -1,0 +1,19 @@
+# exclude log files
+*.log
+
+# exclude target directory
+target/**/*
+
+# exclude test files
+src/test/**/*
+
+# exclude xml config files except pom
+*.xml
+!pom.xml
+
+# exclude non-xml maven files
+.mvn/**/*
+mvn*
+
+# exclude .gitignore~
+.gitignore~
