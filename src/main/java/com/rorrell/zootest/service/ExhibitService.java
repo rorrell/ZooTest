@@ -6,7 +6,6 @@
 package com.rorrell.zootest.service;
 
 import com.rorrell.zootest.data.AnimalRepository;
-import com.rorrell.zootest.data.EnvironmentRepository;
 import com.rorrell.zootest.data.ExhibitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,17 +15,15 @@ import org.springframework.stereotype.Component;
  * @author rachel
  */
 @Component
-public class EnvironmentService {
+public class ExhibitService {
     @Autowired
-    EnvironmentRepository envRepo;
+    ExhibitRepository exRepo;
     
     @Autowired
     AnimalRepository animalRepo;
     
-    @Autowired
-    ExhibitRepository exRepo;
-    
     public void safeDelete(long id) {
-        envRepo.safeDeleteById(id, animalRepo, exRepo);
+        exRepo.safeDeleteById(id, animalRepo);
     }
+    
 }

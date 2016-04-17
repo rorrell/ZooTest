@@ -17,7 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author rachel
  */
-public interface ExhibitRepository extends CrudRepository<Exhibit, Long> {
+public interface ExhibitRepository extends CrudRepository<Exhibit, Long>,
+        EntityRepository<Exhibit, Long> {
     Exhibit findByName(String name);
     List<Exhibit> findByEnvironment(Environment env);
     List<Exhibit> findByEnvironmentId(long id);
@@ -26,4 +27,9 @@ public interface ExhibitRepository extends CrudRepository<Exhibit, Long> {
     @Transactional(readOnly = false)
     @Query("update Exhibit as e set e.environment.id=null where e.environment.id=?1")
     Integer dereferenceEnvironmentById(Long id);
+
+    default void safeDeleteById(long id, AnimalRepository animalRepo) {
+        if(animalRepo.dereferenceExhibitById(id) > -1)
+            this.delete(id);
+    }
 }

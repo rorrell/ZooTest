@@ -19,7 +19,7 @@ public interface EnvironmentRepository extends CrudRepository<Environment, Long>
     Environment findByName(String name);
 
     default void safeDeleteById(long id, AnimalRepository animalRepo, ExhibitRepository exRepo) {
-        if(animalRepo.dereferenceEnvironmentById(id) > 0 && exRepo.dereferenceEnvironmentById(id) > 0)
+        if(animalRepo.dereferenceEnvironmentById(id) > -1 && exRepo.dereferenceEnvironmentById(id) > -1)
             this.delete(id);
     }
 

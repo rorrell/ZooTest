@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Zoo: Exhibits</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"/>
+        <script lang="text/javascript" th:src="@{/js/jquery/jquery.js}"></script>
+        <script lang="text/javascript" th:src="@{/js/environmentAnimalManage.js}"></script>
+    </head>
+    <body>
+        <h1>Exhibits</h1>
+        <table>
+            <thead>
+                <tr>
+                    <td><a href="#" th:href="@{/exhibits}">Name</a></td>
+                    <td><a href="#" th:href="@{/exhibits/location}">Location</a></td>
+                    <td><a href="#" th:href="@{/exhibits/environment}">Environment</a></td>
+                    <td>Compatible Animals</td>
+                    <td>Actions</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="e : ${exhibits}">
+                    <td><a href="#" th:href="@{'/exhibit/' + ${e.id}}" th:text="${e.name}"></a></td>
+                    <td th:text="${e.location}"></td>
+                    <td th:text="${e.environment.name}"></td>
+                    <td>
+                        <div class="click">Animals (click to toggle)</div>
+                        <ul class="toggle" style="display:none">
+                            <li th:each="a : ${e.animals}" th:text="${a.type}"/>
+                        </ul>
+                    </td>
+                    <td>
+                        <a href="#" th:href="@{'/exhibit/edit/' + ${e.id}}">Edit</a>
+                        <a href="#" th:href="@{'/exhibit/delete/' + ${e.id}}">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>

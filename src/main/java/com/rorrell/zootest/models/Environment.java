@@ -8,6 +8,7 @@ package com.rorrell.zootest.models;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -27,7 +28,8 @@ public class Environment implements Serializable, Comparable<Environment> {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+//    @Column(name="id", columnDefinition="serial")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
     @NotNull
     @NotBlank

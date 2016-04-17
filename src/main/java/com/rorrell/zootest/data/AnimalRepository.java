@@ -22,4 +22,9 @@ public interface AnimalRepository extends CrudRepository<Animal, Long>,
     @Transactional(readOnly = false)
     @Query("update Animal as a set a.compatibleEnvironment.id=null where a.compatibleEnvironment.id=?1")
     Integer dereferenceEnvironmentById(Long id);
+
+    @Modifying
+    @Transactional(readOnly = false)
+    @Query("update Animal as a set a.exhibit.id=null where a.exhibit.id=?1")
+    Integer dereferenceExhibitById(Long id);
 }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title th:text="${'Zoo: ' + exhibit.name}">Exhibit</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"/>
+    </head>
+    <body>
+        <h1 th:text="${exhibit.name}"></h1>
+        <table>
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Location</td>
+                    <td>Environment</td>
+                    <td>Compatible Animals</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td th:text="${exhibit.name}"></td>
+                    <td th:text="${exhibit.location}"></td>
+                    <td th:text="${exhibit.environment.name}"></td>
+                    <td>
+                        <ul class="toggle">
+                            <li th:each="a : ${exhibit.animals}" th:text="${a.type}"/>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>

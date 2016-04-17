@@ -8,17 +8,27 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>Environment Editor</title>
+        <title>Exhibit Editor</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <!--        <script lang="text/javascript" th:src="@{/js/jquery/jquery.js}"></script>-->
         <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"/>
     </head>
     <body>
-        <h1 th:text="(${environment.id} == 0)? 'Add New Environment' : 'Edit ' + ${environment.name}"></h1>
-        <form action="#" th:action="@{/environment/save}" th:object="${environment}" method="post">
+        <h1 th:text="(${exhibit.id} == 0)? 'Add New Exhibit' : 'Edit ' + ${exhibit.name}"></h1>
+        <form action="#" th:action="@{/exhibit/save}" th:object="${exhibit}" method="post">
             <label for="name">Name:</label>
             <input type="text" th:field="*{name}" />
             <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"/><br/>
+            <label for="location">Location:</label>
+            <input type="text" th:field="*{location}" />
+            <span th:if="${#fields.hasErrors('location')}" th:errors="*{location}"/><br/>
+            <label for="environment">Environment:</label>
+            <select th:field="*{environment}">
+                <option value="">None</option>
+                <option th:each="env : ${allEnvironments}"
+                        th:value="${env.id}"
+                        th:text="${env.name}"/>
+            </select><br/>
             <input type='hidden' th:field='*{id}' />
             <input type="submit" value="Submit" name="submit"/>
         </form>
