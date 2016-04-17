@@ -8,35 +8,17 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>Animal Editor</title>
+        <title>Environment Editor</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <script lang="text/javascript" th:src="@{/js/jquery/jquery.js}"></script>
-        <script lang="text/javascript" th:src="@{/js/exhibitSelectManage.js}"></script>
+<!--        <script lang="text/javascript" th:src="@{/js/jquery/jquery.js}"></script>-->
         <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"/>
     </head>
     <body>
-        <h1 th:text="(${animal.id} == 0)? 'Add New Animal' : 'Edit ' + ${animal.type}"></h1>
-        <form action="#" th:action="@{/animal/save}" th:object="${animal}" method="post">
-            <label for="type">Type:</label>
-            <input type="text" th:field="*{type}" />
-            <span th:if="${#fields.hasErrors('type')}" th:errors="*{type}"/><br/>
-            <label for="quantity">Quantity:</label>
-            <input type="text" th:field="*{quantity}" />
-            <span th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"/><br/>
-            <label for="compatibleEnvironment">Environment:</label>
-            <select th:field="*{compatibleEnvironment}">
-                <option value="">None</option>
-                <option th:each="env : ${allEnvironments}"
-                        th:value="${env.id}"
-                        th:text="${env.name}"/>
-            </select><br/>
-            <label for="exhibit">Exhibit:</label>
-            <select th:field="*{exhibit}">
-                <option value="">None</option>
-                <option th:each="ex : ${allExhibits}"
-                        th:value="${ex.id}"
-                        th:text="${ex.name}"/>
-            </select><br/>
+        <h1 th:text="(${environment.id} == 0)? 'Add New Animal' : 'Edit ' + ${environment.name}"></h1>
+        <form action="#" th:action="@{/environment/save}" th:object="${environment}" method="post">
+            <label for="name">Name:</label>
+            <input type="text" th:field="*{name}" />
+            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"/><br/>
             <input type='hidden' th:field='*{id}' />
             <input type="submit" value="Sumit" name="submit"/>
         </form>

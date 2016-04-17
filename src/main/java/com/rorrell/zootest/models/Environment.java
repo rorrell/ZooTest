@@ -32,7 +32,7 @@ public class Environment implements Serializable, Comparable<Environment> {
     @NotNull
     @NotBlank
     private String name;
-    @OneToMany(fetch=FetchType.EAGER)
+    @OneToMany(fetch=FetchType.LAZY, mappedBy="compatibleEnvironment")
     private List<Animal> compatibleAnimals;
 
     public Environment() {
@@ -64,6 +64,11 @@ public class Environment implements Serializable, Comparable<Environment> {
 
     public void setCompatibleAnimals(List<Animal> compatibleAnimals) {
         this.compatibleAnimals = compatibleAnimals;
+    }
+    
+    public void addCompatibleAnimal(Animal animal) {
+        if(this.compatibleAnimals.indexOf(animal) < 0)
+            this.compatibleAnimals.add(animal);
     }
 
     @Override

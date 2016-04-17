@@ -13,6 +13,7 @@ table, td, thead {
     border-collapse: collapse;
     padding: 5px 10px;
     font-family: sans-serif;
+    vertical-align: text-top;
 }
 
 thead {
@@ -37,4 +38,16 @@ thead a:visited {
 
 thead a:hover {
     color: blueviolet;
+    cursor: pointer;
+}
+
+.click:hover {
+    color: blueviolet;
+    cursor: pointer;
+}
+
+.toggle {
+    list-style-type: none;
+    margin-left: 0px;
+    padding-left: 10px;
 }

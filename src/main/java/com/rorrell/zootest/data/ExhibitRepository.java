@@ -8,7 +8,10 @@ package com.rorrell.zootest.data;
 import com.rorrell.zootest.models.Environment;
 import com.rorrell.zootest.models.Exhibit;
 import java.util.List;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -18,4 +21,9 @@ public interface ExhibitRepository extends CrudRepository<Exhibit, Long> {
     Exhibit findByName(String name);
     List<Exhibit> findByEnvironment(Environment env);
     List<Exhibit> findByEnvironmentId(long id);
+    
+    @Modifying
+    @Transactional(readOnly = false)
+    @Query("update Exhibit as e set e.environment.id=null where e.environment.id=?1")
+    Integer dereferenceEnvironmentById(Long id);
 }

@@ -8,6 +8,7 @@ package com.rorrell.zootest.models;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -36,7 +37,7 @@ public class Exhibit implements Serializable, Comparable<Exhibit> {
     @NotNull
     @NotBlank
     private String location;
-    @OneToMany(fetch=FetchType.EAGER)
+    @OneToMany(fetch=FetchType.LAZY, mappedBy="exhibit")
     private List<Animal> animals;
     @OneToOne
     private Environment environment;
@@ -44,10 +45,14 @@ public class Exhibit implements Serializable, Comparable<Exhibit> {
     public Exhibit() {
     }
 
-    public Exhibit(String name, String location, Environment environment) {
+    public Exhibit(long id, String name, String location, Environment environment) {
         this.name = name;
         this.location = location;
         this.environment = environment;
+    }
+    
+    public Exhibit(String name, String location, Environment environment) {
+        this(0, name, location, environment);
     }
     
     public long getId() {
@@ -80,6 +85,11 @@ public class Exhibit implements Serializable, Comparable<Exhibit> {
 
     public void setAnimals(List<Animal> animals) {
         this.animals = animals;
+    }
+    
+    public void addAnimal(Animal animal) {
+        if(this.animals.indexOf(animal) < 0)
+            this.animals.add(animal);
     }
 
     public Environment getEnvironment() {

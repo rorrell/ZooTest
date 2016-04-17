@@ -8,27 +8,27 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title th:text="${'Zoo: ' + animal.type}">Animal</title>
+        <title th:text="${'Zoo: ' + environment.name}">Environment</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"/>
     </head>
     <body>
-        <h1 th:text="${animal.type}"></h1>
+        <h1 th:text="${environment.name}"></h1>
         <table>
             <thead>
                 <tr>
-                    <td>Type</td>
-                    <td>Quantity</td>
-                    <td>Environment</td>
-                    <td>Exhibit</td>
+                    <td>Name</td>
+                    <td>Compatible Animals</td>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td th:text="${animal.type}"></td>
-                    <td th:text="${animal.quantity}"></td>
-                    <td th:text="${animal.compatibleEnvironment.name}"></td>
-                    <td th:text="${animal.exhibit.name}"></td>
+                    <td th:text="${environment.name}"></td>
+                    <td>
+                        <ul class="toggle">
+                            <li th:each="a : ${environment.compatibleAnimals}" th:text="${a.type}"/>
+                        </ul>
+                    </td>
                 </tr>
             </tbody>
         </table>

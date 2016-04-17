@@ -6,12 +6,21 @@
 package com.rorrell.zootest.data;
 
 import com.rorrell.zootest.models.Environment;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 
 /**
  *
  * @author rachel
  */
-public interface EnvironmentRepository extends CrudRepository<Environment, Long> {
+public interface EnvironmentRepository extends CrudRepository<Environment, Long>,
+        EntityRepository<Environment, Long> {
+
     Environment findByName(String name);
+
+    default void safeDeleteById(long id, AnimalRepository animalRepo, ExhibitRepository exRepo) {
+        if(animalRepo.dereferenceEnvironmentById(id) > 0 && exRepo.dereferenceEnvironmentById(id) > 0)
+            this.delete(id);
+    }
+
 }

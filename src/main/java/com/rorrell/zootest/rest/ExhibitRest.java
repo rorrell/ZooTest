@@ -8,6 +8,7 @@ package com.rorrell.zootest.rest;
 import com.rorrell.zootest.data.ExhibitRepository;
 import com.rorrell.zootest.models.Exhibit;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,6 +27,11 @@ public class ExhibitRest {
     
     @RequestMapping(value="/exhibits-by-environment", method=RequestMethod.GET)
     public List<Exhibit> getExhibitsByEnvironment(@RequestParam("env") long envId) {
-        return exhibitRepo.findByEnvironmentId(envId);
+        return exhibitRepo.findByEnvironmentId(envId).stream()
+                .map(ex -> {
+                    ex.setAnimals(null);
+                    ex.setEnvironment(null);
+                    return ex;
+                }).collect(Collectors.toList());
     }
 }

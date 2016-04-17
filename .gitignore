@@ -17,3 +17,9 @@ mvn*
 
 # exclude .gitignore~
 .gitignore~
+
+# exclude sql
+*.sql
+
+# exclude jquery ui while not using
+jquery-ui/
